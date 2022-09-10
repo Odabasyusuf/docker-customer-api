@@ -15,6 +15,14 @@ function getAPIData($path = null, $status = null){
     return json_decode($res->getBody());
 }
 
+function getApiCustomer($id){
+    $url = config('api.url') . 'customer'.'/'. $id;
+    $client = new \GuzzleHttp\Client();
+    $res = $client->get($url);
+
+    return json_decode($res->getBody());
+}
+
 function dateTouch($date){
     return date('d.m.Y', strtotime($date));
 }

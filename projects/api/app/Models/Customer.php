@@ -37,7 +37,7 @@ class Customer extends Model
 
     public static function getCustomer($id)
     {
-        return self::where('id',$id)->get();
+        return self::withTrashed()->where('id',$id)->get();
     }
 
     public static function getRequest($request){
