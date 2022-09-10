@@ -126,17 +126,48 @@
     </div>
 </div>
 
+<div wire:ignore.self class="modal fade" id="asd">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Liste Düzenle</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form wire:submit.prevent="updateList">
+                    <div class="form-group">
+                        <label class="text-black font-w500">Liste Adı</label>
+                        <input type="text" wire:model.lazy="update_list_name" class="form-control" value="2" required>
+                    </div>
+                    <div class="form-group text-right">
+                        <div wire:loading class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                        <button type="submit" class="btn btn-success">Düzenle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div wire:ignore.self class="modal fade" id="updateCustomer" aria-labelledby="updateCustomerLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">{{ $full_name }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body" wire:loading.class="loading-opacity">
+                @if(session()->has('update'))
+                    <div class="alert alert-success">
+                        {{ session('update') }}
+                    </div>
+                @endif
+
                 <form wire:submit.prevent="updateCustomer">
                 <div class="row form-group mb-2">
-
                     <div class="col-md-3">
                         Ad:
                     </div>
@@ -145,7 +176,6 @@
                     </div>
                 </div>
                 <div class="row form-group mb-2">
-
                     <div class="col-md-3">
                         E-mail:
                     </div>
@@ -162,11 +192,28 @@
                     </div>
                 </div>
 
-                <div style="text-align: right">
-                    <button type="submit" class="btn btn-primary mt-2">Güncelle</button>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div wire:loading class="spinner-border" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    <div class="col-md-9" style="text-align: right">
+                        <button type="submit" class="btn btn-primary mt-2">Güncelle</button>
+                    </div>
                 </div>
+
                 </form>
             </div>
         </div>
     </div>
+
+    <script>
+        $(document).ready(function(){
+            window.livewire.on('alert_remove',()=>{
+                setTimeout(function(){ $(".alert-success").fadeOut('fast');
+                }, 1000); // 3 secs
+            });
+        });
+    </script>
 </div>

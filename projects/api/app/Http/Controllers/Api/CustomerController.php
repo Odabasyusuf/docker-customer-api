@@ -57,9 +57,15 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update($id, Request $request)
     {
-        //
+        $customer = Customer::withTrashed()->find($id);
+        $customer->full_name = $request->full_name;
+        $customer->email = $request->email;
+        $customer->birth_date = $request->birth_date;
+        $customer->save();
+
+        return $this->responseUpdate($this->customer->getCustomer($id));
     }
 
     /**
