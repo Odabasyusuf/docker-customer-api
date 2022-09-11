@@ -19,8 +19,9 @@
         <div class="col-md-9 mt-3" style="margin: 0 auto">
             <div class="mb-2" style="text-align: right">
                 <button type="button" class="btn btn-sm btn-success"
+                        wire:click="resetInfo()"
                         data-bs-toggle="modal" data-bs-target="#customerAddModal">
-                    <i class="fas fa-plus"></i>  Kullanıcı Ekle</button>
+                    <i class="fas fa-plus"></i>  {{ __('customer.add_customer') }}</button>
             </div>
             @include('layouts.message')
             <table class="table">
@@ -68,7 +69,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Kullanıcı Ekle</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">{{ __('customer.add_customer') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -82,7 +83,7 @@
 
                         <div class="row form-group mb-2">
                             <div class="col-md-3">
-                                Ad:
+                                {{ __('customer.full_name') }}
                             </div>
                             <div class="col-md-9">
                                 <input type="text" wire:model.lazy="full_name" class="form-control" required>
@@ -90,7 +91,7 @@
                         </div>
                         <div class="row form-group mb-2">
                             <div class="col-md-3">
-                                E-mail:
+                                {{ __('customer.email') }}
                             </div>
                             <div class="col-md-9">
                                 <input type="email" wire:model.lazy="email" class="form-control" required>
@@ -98,7 +99,7 @@
                         </div>
                         <div class="row form-group mb-2">
                             <div class="col-md-3">
-                                Şifre:
+                                {{ __('customer.password') }}
                             </div>
                             <div class="col-md-9">
                                 <input type="password" wire:model.lazy="password" class="form-control" required>
@@ -106,7 +107,7 @@
                         </div>
                         <div class="row form-group mb-2">
                             <div class="col-md-3">
-                                Doğum Tarihi:
+                                {{ __('customer.birth_date') }}
                             </div>
                             <div class="col-md-9">
                                 <input type="date" wire:model.lazy="birth_date" class="form-control">
@@ -115,7 +116,7 @@
 
                         <div class="row">
                             <div class="col-md-12" style="text-align: right">
-                                <button type="submit" class="btn btn-primary mt-2">Kaydet</button>
+                                <button type="submit" class="btn btn-primary mt-2"> {{ __('customer.save') }}</button>
                             </div>
                         </div>
 
@@ -138,7 +139,7 @@
                     <form wire:submit.prevent="updateCustomer">
                         <div class="row form-group mb-2">
                             <div class="col-md-3">
-                                Ad:
+                                {{ __('customer.full_name') }}
                             </div>
                             <div class="col-md-9">
                                 <input type="text" wire:model.lazy="full_name" class="form-control">
@@ -146,7 +147,7 @@
                         </div>
                         <div class="row form-group mb-2">
                             <div class="col-md-3">
-                                E-mail:
+                                {{ __('customer.email') }}
                             </div>
                             <div class="col-md-9">
                                 <input type="email" wire:model.lazy="email" class="form-control">
@@ -154,7 +155,7 @@
                         </div>
                         <div class="row form-group mb-2">
                             <div class="col-md-3">
-                                Doğum Tarihi:
+                                {{ __('customer.birth_date') }}
                             </div>
                             <div class="col-md-9">
                                 <input type="date" wire:model.lazy="birth_date" class="form-control">
@@ -168,7 +169,7 @@
                                 </div>
                             </div>
                             <div class="col-md-9" style="text-align: right">
-                                <button type="submit" class="btn btn-primary mt-2" data-bs-dismiss="modal">Güncelle</button>
+                                <button type="submit" class="btn btn-primary mt-2" data-bs-dismiss="modal"> {{ __('customer.update') }}</button>
                             </div>
                         </div>
 
@@ -183,16 +184,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Silme Onayı</h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> {{ __('customer.delete_title') }}</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Kayıt silinecek. Onaylıyor musunuz?</p>
+                    <p> {{ __('customer.delete_text') }}</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{ __('customer.cancel') }}</button>
 
-                    <button type="button" wire:click.prevent="destroyCustomer()" class="btn btn-danger close-modal" data-bs-dismiss="modal">Sil</button>
+                    <button type="button" wire:click.prevent="destroyCustomer()" class="btn btn-danger close-modal" data-bs-dismiss="modal">
+                        {{ __('customer.delete') }}
+                    </button>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 
 return [
     'message' => [
-        'successfully_done' => 'Başarıyla Tamamland',
+        'successfully_done' => 'Başarıyla Tamamlandı',
         'successfully_save' => 'Başarıyla Kaydedildi',
         'successfully_update' => 'Başarıyla Güncellendi',
         'successfully_deleted' => 'Başarıyla Silindi',
