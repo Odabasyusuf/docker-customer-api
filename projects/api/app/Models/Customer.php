@@ -51,4 +51,8 @@ class Customer extends Model
         }
         return self::getAllCustomersWithTrashed();
     }
+
+    public static function findId($id){
+        return self::withTrashed()->find($id);
+    }
 }

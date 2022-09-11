@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\Customer;
 use Illuminate\Http\Request;
 use App\Traits\APIResponseTrait;
@@ -57,13 +58,10 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update($id, UpdateCustomerRequest $request)
     {
-        $customer = Customer::withTrashed()->find($id);
-        $customer->full_name = $request->full_name;
-        $customer->email = $request->email;
-        $customer->birth_date = $request->birth_date;
-        $customer->save();
+        $customer = $this->customer->findID($id);
+        $customer->update($request->validated());
 
         return $this->responseUpdate($this->customer->getCustomer($id));
     }
