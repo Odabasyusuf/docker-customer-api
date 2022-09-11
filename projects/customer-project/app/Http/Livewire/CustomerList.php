@@ -44,4 +44,14 @@ class CustomerList extends Component
 
         session()->flash('update', $this->message );
     }
+
+    public function customerIdForDestroy($id){
+        $this->customer_id = $id;
+    }
+
+    public function destroyCustomer(){
+        $this->message = destroyApiCustomer($this->customer_id);
+
+        session()->flash('deleted', $this->message);
+    }
 }

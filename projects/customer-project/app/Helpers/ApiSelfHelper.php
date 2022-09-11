@@ -37,6 +37,16 @@ function postApiUpdateCustomer($id, $data){
     return $response['message'];
 }
 
+function destroyApiCustomer($id){
+    $save = Http::delete(env('API_URL') . 'customer/' . $id, [
+        'id' => $id,
+    ]);
+
+    $response = $save->json();
+
+    return $response['message'];
+}
+
 function dateTouch($date){
     return date('d.m.Y', strtotime($date));
 }

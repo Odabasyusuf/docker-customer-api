@@ -74,6 +74,8 @@ class CustomerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->customer->destroy($id);
+
+        return $this->responseDestroy();
     }
 }

@@ -2,14 +2,14 @@
 
 return [
     'message' => [
-        'successfully_done' => 'Successfully Done',
-        'successfully_save' => 'Successfully Saved',
-        'successfully_update' => 'Successfully Updated',
-        'successfully_deleted' => 'Successfully Deleted',
-        'successfully_restored' => 'Successfully Restored',
-        'bad_request' => 'Bad Request',
-        'unauthorized' => 'Unauthorized',
-        'not_found' => 'Not Found',
-        'server_error' => 'Internal Server Error',
+        'successfully_done' => 'Başarıyla Tamamland',
+        'successfully_save' => 'Başarıyla Kaydedildi',
+        'successfully_update' => 'Başarıyla Güncellendi',
+        'successfully_deleted' => 'Başarıyla Silindi',
+        'successfully_restored' => 'Başarıyla Düzenlendi',
+        'bad_request' => 'Geçersiz İstek',
+        'unauthorized' => 'Yetkisiz Erişim',
+        'not_found' => 'Bulunamadı',
+        'server_error' => 'Sunucu Hatası',
     ]
 ];
