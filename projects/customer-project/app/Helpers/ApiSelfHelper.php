@@ -2,6 +2,7 @@
 use App\Enums\StatusEnum;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Hash;
 
 // Guzzle Paketi Kullanıldı.
 function getAPIData($path = null, $status = null){
@@ -23,6 +24,19 @@ function getApiCustomer($id){
     $res = $client->get($url);
 
     return json_decode($res->getBody());
+}
+
+function postApiAddCustomer($data){
+    $save = Http::post(env('API_URL').'customer', [
+        'full_name' => $data['full_name'],
+        'email' => $data['email'],
+        'password' => Hash::make($data['password']),
+        'birth_date' => $data['birth_date'],
+    ]);
+
+    $response = $save->json();
+
+    return $response['message'];
 }
 
 function postApiUpdateCustomer($id, $data){

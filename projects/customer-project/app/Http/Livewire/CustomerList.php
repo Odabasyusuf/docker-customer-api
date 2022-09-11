@@ -9,7 +9,7 @@ use App\Enums\StatusEnum;
 class CustomerList extends Component
 {
     public $status = null,
-        $response, $message, $customer_id, $full_name, $email, $birth_date;
+        $response, $message, $customer_id, $full_name, $password, $email, $birth_date;
 
     public function render(){
 
@@ -25,6 +25,20 @@ class CustomerList extends Component
         $this->status = $status;
     }
 
+    public function addCustomer(){
+        $data = [
+            'full_name' => $this->full_name,
+            'email' => $this->email,
+            'password' => $this->password,
+            'birth_date' => $this->birth_date
+        ];
+        $this->message = postApiAddCustomer($data);
+
+        session()->flash('created', $this->message );
+
+        $this->resetInfo();
+    }
+
     public function getCustomerDetail($id){
         $res = getApiCustomer($id);
         $this->customer_id = $res->data[0]->id;
@@ -37,15 +51,17 @@ class CustomerList extends Component
         $data = [
             'full_name' => $this->full_name,
             'email' => $this->email,
-            'birth_date' => $this->birth_date,
+            'birth_date' => $this->birth_date
         ];
 
         $this->message = postApiUpdateCustomer($this->customer_id, $data);
 
         session()->flash('update', $this->message );
+
+        $this->resetInfo();
     }
 
-    public function customerIdForDestroy($id){
+    public function customerIdAssign($id){
         $this->customer_id = $id;
     }
 
@@ -54,4 +70,9 @@ class CustomerList extends Component
 
         session()->flash('deleted', $this->message);
     }
+
+    public function resetInfo(){
+        $this->customer_id = $this->full_name = $this->email = $this->password = null;
+    }
+
 }

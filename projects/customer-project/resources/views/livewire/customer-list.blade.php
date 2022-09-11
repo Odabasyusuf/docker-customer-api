@@ -16,14 +16,13 @@
                 <span class="sr-only">Loading...</span>
             </div>
         </div>
-        <div class="col-md-9 mt-5" style="margin: 0 auto">
+        <div class="col-md-9 mt-3" style="margin: 0 auto">
             <div class="mb-2" style="text-align: right">
+                <button type="button" class="btn btn-sm btn-success"
+                        data-bs-toggle="modal" data-bs-target="#customerAddModal">
+                    <i class="fas fa-plus"></i>  Kullanıcı Ekle</button>
             </div>
-            @if(session()->has('deleted'))
-                <div class="alert alert-success">
-                    {{ session('deleted') }}
-                </div>
-            @endif
+            @include('layouts.message')
             <table class="table">
                 <thead class="table-dark">
                 <tr>
@@ -53,7 +52,7 @@
                             <i class="fas fa-pen" wire:click="getCustomerDetail({{ $customer->id }})"
                                data-bs-toggle="modal" data-bs-target="#updateCustomerModal"
                                style="cursor:pointer;color: cornflowerblue"></i>  
-                            <i class="fas fa-trash" wire:click="customerIdForDestroy({{ $customer->id }})"
+                            <i class="fas fa-trash" wire:click="customerIdAssign({{ $customer->id }})"
                                data-bs-toggle="modal" data-bs-target="#destroyCustomerModal"
                                style="cursor:pointer; color: #c50d0d"></i>
                         </td>
@@ -61,6 +60,68 @@
                 @endforeach
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <div wire:ignore.self class="modal fade" id="customerAddModal" aria-labelledby="customerAddModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Kullanıcı Ekle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <form wire:submit.prevent="addCustomer">
+                        @if(session()->has('created'))
+                            <div class="alert alert-success">
+                                {{ session('created') }}
+                            </div>
+                        @endif
+
+                        <div class="row form-group mb-2">
+                            <div class="col-md-3">
+                                Ad:
+                            </div>
+                            <div class="col-md-9">
+                                <input type="text" wire:model.lazy="full_name" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row form-group mb-2">
+                            <div class="col-md-3">
+                                E-mail:
+                            </div>
+                            <div class="col-md-9">
+                                <input type="email" wire:model.lazy="email" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row form-group mb-2">
+                            <div class="col-md-3">
+                                Şifre:
+                            </div>
+                            <div class="col-md-9">
+                                <input type="password" wire:model.lazy="password" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row form-group mb-2">
+                            <div class="col-md-3">
+                                Doğum Tarihi:
+                            </div>
+                            <div class="col-md-9">
+                                <input type="date" wire:model.lazy="birth_date" class="form-control">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12" style="text-align: right">
+                                <button type="submit" class="btn btn-primary mt-2">Kaydet</button>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -74,12 +135,6 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body" wire:loading.class="loading-opacity">
-                    @if(session()->has('update'))
-                        <div class="alert alert-success">
-                            {{ session('update') }}
-                        </div>
-                    @endif
-
                     <form wire:submit.prevent="updateCustomer">
                         <div class="row form-group mb-2">
                             <div class="col-md-3">
@@ -113,7 +168,7 @@
                                 </div>
                             </div>
                             <div class="col-md-9" style="text-align: right">
-                                <button type="submit" class="btn btn-primary mt-2">Güncelle</button>
+                                <button type="submit" class="btn btn-primary mt-2" data-bs-dismiss="modal">Güncelle</button>
                             </div>
                         </div>
 
