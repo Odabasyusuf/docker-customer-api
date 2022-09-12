@@ -5,9 +5,9 @@
 
 Projeyi Docker kullanılarak, tek Container üzerinde birden fazla laravel projesi çalıştırabilecek şekilde kurguladım.
 
-'api' projesi API kaynağımız, 'customer-prject' ise önyüz diyebileceğimiz kullanının gördüğü projedir.
+'api' projesi API kaynağımız, 'customer-project' ise önyüz diyebileceğimiz kullanının gördüğü projedir.
 
-Database işlemlerinin tamamı 'api' projesinde işlenmektedir. 'customer-project' in herhangi bir database bağlantısı bulunmamaktadır.
+Database işlemlerinin tamamı 'api' projesinde işlenmektedir. 'customer-project' in herhangi bir database bağlantısı bulunmamaktadır ve Tek sayfada işlem yapabilmek adına Ajax istekleri için  Livewire kullanılmıştır.
 
 Test domaini: customer-project.test
 
